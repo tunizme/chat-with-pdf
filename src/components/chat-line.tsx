@@ -18,7 +18,7 @@ import { Message } from "ai/react";
 import ReactMarkdown from "react-markdown";
 import { formattedText } from "@/lib/utils";
 
-const wrappedText = (text: string) =>
+const convertNewLines = (text: string) =>
   text.split("\n").map((line, i) => (
     <span key={i}>
       {line}
@@ -30,7 +30,7 @@ interface ChatBubbleProps extends Partial<Message> {
   sources: string[];
 }
 
-export function ChatBubble({
+export function ChatLine({
   role = "assistant",
   content,
   sources,
@@ -38,7 +38,7 @@ export function ChatBubble({
   if (!content) {
     return null;
   }
-  const wrappedMessage = wrappedText(content);
+  const wrappedMessage = convertNewLines(content);
   return (
     <div>
       <Card className="mb-2">
